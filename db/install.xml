@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/linkman/db" VERSION="20250110" COMMENT="XMLDB file for Moodle local/linkman"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_linkman" COMMENT="table which stores links and generate interface that acts as middleware">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="code" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="generated code"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name"/>
+        <FIELD NAME="created" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="updated" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="baselink" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="original link"/>
+        <FIELD NAME="note" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Note about link"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

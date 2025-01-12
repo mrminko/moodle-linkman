@@ -1,0 +1,82 @@
+<style>
+    /*body {*/
+    /*    font-family: Arial, sans-serif;*/
+    /*    margin: 20px;*/
+    /*    background-color: #f9f9f9;*/
+    /*}*/
+    .admin-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    h1 {
+        color: #333;
+        display: inline;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: var(--primary);
+        color: white;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    .export-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        align-items: end;
+    }
+    .export-btn:hover {
+        background-color: #0066B5;
+        color: white;
+    }
+</style>
+
+<body class="linkman-admin-dashboard">
+
+<div class="admin-panel">
+    <h1>External Link Manager</h1>
+    <button class="linkman-add">Add</button>
+<!--    <a href="{{export}}" class="export-btn">Export</a>-->
+</div>
+
+
+<table class="linkman-table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Link</th>
+        <th>Created</th>
+        <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{# data}}
+        <tr>
+            <td>{{index}}</td>
+            <td>{{firstname}}</td>
+            <td>{{lastname}}</td>
+            <td>{{email}}</td>
+            <td>{{phone1}}</td>
+            <td>{{studentcode}}</td>
+    {{/ data}}
+
+    </tbody>
+</table>
+</body>
