@@ -9,9 +9,13 @@ import ModalForm from 'core_form/modalform';
 
 const Selectors = {
     addBtn: '.linkman-add',
+    linkmanTable: 'linkman-table',
 };
 
-function initForm(e) {
+let currentPage = 1;
+let totalPages;
+
+function initAddForm(e) {
     e.preventDefault();
     const element = e.target;
     const modalForm = getForm(element);
@@ -33,15 +37,11 @@ function getForm(element) {
     return modalForm;
 }
 function init() {
-    console.log("inited=====");
     $(Selectors.addBtn).on('click',e => {
-        console.log('clicked', e)
-        initForm(e)
-    });
-
+        initAddForm(e)
+    })
 }
 
-export {
+export default {
     init
 }
-

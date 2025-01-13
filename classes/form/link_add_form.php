@@ -6,6 +6,8 @@ use context;
 use core_form\dynamic_form;
 use moodle_url;
 use context_system;
+use \core\uuid;
+
 class link_add_form extends dynamic_form {
     protected function definition() {
         $mform = $this->_form;
@@ -36,6 +38,8 @@ class link_add_form extends dynamic_form {
     {
         global $CFG, $DB;
         $data = $this->get_data();
+        $data->created = time();
+        $data->code = random_string();
         $inserted = $DB->insert_record('local_linkman', $data);
         $result = new \stdClass();
         if ($inserted) {
