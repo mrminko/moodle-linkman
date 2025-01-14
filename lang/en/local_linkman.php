@@ -23,8 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Link Man';
+$string['pluginname'] = 'External Links Manager';
 $string['link_name'] = 'Name';
 $string['base_link'] = 'Original Link';
 $string['link_note'] = 'Note';
 $string['add'] = 'Add';
+$string['linkman:config'] = 'Configure External Links Manager';
+$string['linkman:view'] = 'View External Links Manager';

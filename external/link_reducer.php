@@ -1,10 +1,10 @@
 <?php
 
 namespace local_linkman\external;
-use external_function_parameters;
-use external_multiple_structure;
-use external_single_structure;
-use external_value;
+use core_external\external_function_parameters;
+use core_external\external_multiple_structure;
+use core_external\external_single_structure;
+use core_external\external_value;
 use stdClass;
 
 class link_reducer extends \core_external\external_api {
@@ -31,9 +31,10 @@ class link_reducer extends \core_external\external_api {
                         'baselink' => new external_value(PARAM_TEXT, 'item base link'),
                         'note' => new external_value(PARAM_TEXT, 'item note'),
                     ]),
-                )
+                ),
+                'error' => new external_value(PARAM_TEXT, 'error message', VALUE_OPTIONAL),
             ])
-        ], 'data to be consumed displayed', VALUE_OPTIONAL);
+        ], 'data to be displayed', VALUE_OPTIONAL);
     }
 
     public static function execute($action, $payload) {
@@ -42,8 +43,15 @@ class link_reducer extends \core_external\external_api {
         $result = new \stdClass();
         $result->success = true;
         $result->data = new stdClass();
-        $items = ['id' => 1, 'name' => 'mgmg', 'code' => 'uier', 'created' => 'jkfas', 'baselink' => 'base', 'note' => 'ndhfakl'];
-        $result->data->items = $items;
+        $item = new stdClass();
+        $item->id = 1;
+        $item->name = 'mgmg';
+        $item->code = 'uadf';
+        $item->created = 'ndfa';
+        $item->baselink = 'fdfasa';
+        $item->note = 'noteeeee';
+//        $items = ['id' => 1, 'name' => 'mgmg', 'code' => 'uier', 'created' => 'jkfas', 'baselink' => 'base', 'note' => 'ndhfakl'];
+        $result->data->items = [$item];
         return $result;
     }
 }

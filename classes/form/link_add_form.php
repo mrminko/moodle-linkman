@@ -12,15 +12,15 @@ class link_add_form extends dynamic_form {
     protected function definition() {
         $mform = $this->_form;
 
-        $mform->addElement('text', 'name', get_string('link_name', 'local_linkman'), array('size' => 60, 'maxlength' => 128));
+        $mform->addElement('text', 'name', get_string('link_name', 'local_linkman'), array('size' => 30, 'maxlength' => 20));
         $mform->setType('name', PARAM_TEXT);
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
 
-        $mform->addElement('text', 'baselink', get_string('base_link', 'local_linkman'));
+        $mform->addElement('text', 'baselink', get_string('base_link', 'local_linkman'), array('size' => 50, 'maxlength' => 70));
         $mform->setType('baselink', PARAM_URL);
         $mform->addRule('baselink', get_string('required'), 'required', null, 'client');
 
-        $mform->addElement('textarea', 'note', get_string('link_note', 'local_linkman'));
+        $mform->addElement('text', 'note', get_string('link_note', 'local_linkman'), array('size' => 50, 'maxlength' => 100));
         $mform->setType('note', PARAM_TEXT);
     }
 

@@ -29,5 +29,5 @@ function xmldb_local_linkman_upgrade($oldversion) {
             $dbmanager->add_field($table, $field);
         }
     }
-    upgrade_plugin_savepoint(true, 2025010107, 'local', 'linkman');
+    upgrade_plugin_savepoint(true, 2025010109, 'local', 'linkman');
 }

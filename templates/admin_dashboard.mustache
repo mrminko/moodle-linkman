@@ -58,24 +58,37 @@
 <table class="linkman-table">
     <thead>
     <tr>
-        <th>#</th>
+<!--        <th>#</th>-->
         <th>Name</th>
-        <th>Link</th>
+        <th>Original Link</th>
         <th>Created</th>
-        <th>Code</th>
+        <th>Note</th>
+        <th>Local Link</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     {{# data}}
-        <tr>
-            <td>{{index}}</td>
-            <td>{{firstname}}</td>
-            <td>{{lastname}}</td>
-            <td>{{email}}</td>
-            <td>{{phone1}}</td>
-            <td>{{studentcode}}</td>
+        <tr data-id="{{id}}" class="linkman-table-row">
+            <td>{{name}}</td>
+            <td>{{baselink}}</td>
+            <td>{{#userdate}} {{created}}, {{#str}} strftimedate, core_langconfig {{/str}} {{/userdate}}
+            </td>
+            <td>{{note}}</td>
+            <td>
+                <div id="linkman-id-{{id}}" style="display:inline-block; border:none;">
+                    {{config.wwwroot}}/local/linkman/request.php?code={{code}}
+                </div>
+            </td>
+        <td>
+            <button class="btn btn-primary ml-2" data-action="copytoclipboard" data-clipboard-target="#linkman-id-{{id}}"
+                    data-clipboard-success-message="Copied successfully">Copy</button>
+        </td>
     {{/ data}}
 
     </tbody>
 </table>
 </body>
+{{#js}}
+    require(["core/copy_to_clipboard"]);
+{{/js}}
