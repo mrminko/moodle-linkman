@@ -32,18 +32,19 @@
     tr:hover {
         background-color: #f1f1f1;
     }
-    .export-btn {
-        background-color: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 12px;
+    .editable-icon {
         cursor: pointer;
         border-radius: 4px;
-        align-items: end;
+        transition: background-color 0.3s, transform 0.2s;
     }
-    .export-btn:hover {
-        background-color: #0066B5;
-        color: white;
+
+    .editable-icon:hover {
+        background-color: #f0f0f0; /* Light background color on hover */
+        transform: scale(1.5); /* Slightly enlarge the icon for better feedback */
+    }
+
+    .editable-icon:active {
+        background-color: #ddd; /* Darker background on click */
     }
 </style>
 
@@ -61,9 +62,11 @@
 <!--        <th>#</th>-->
         <th>Name</th>
         <th>Original Link</th>
-        <th>Created</th>
+<!--        <th>Created</th>-->
         <th>Note</th>
         <th>Local Link</th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
     </thead>
@@ -72,8 +75,8 @@
         <tr data-id="{{id}}" class="linkman-table-row">
             <td>{{name}}</td>
             <td>{{baselink}}</td>
-            <td>{{#userdate}} {{created}}, {{#str}} strftimedate, core_langconfig {{/str}} {{/userdate}}
-            </td>
+<!--            <td>{{#userdate}} {{created}}, {{#str}} strftimedate, core_langconfig {{/str}} {{/userdate}}-->
+<!--            </td>-->
             <td>{{note}}</td>
             <td>
                 <div id="linkman-id-{{id}}" style="display:inline-block; border:none;">
@@ -84,6 +87,9 @@
             <button class="btn btn-primary ml-2" data-action="copytoclipboard" data-clipboard-target="#linkman-id-{{id}}"
                     data-clipboard-success-message="Copied successfully">Copy</button>
         </td>
+        <td><i class="fa fa-pencil editable-icon" data-action="linkman-item-edit" data-id="{{id}}"
+        data-name="{{name}}" data-baselink="{{baselink}}" data-note="{{note}}"></i></td>
+        <td><i class="fa fa-xmark-square editable-icon" data-action="linkman-item-delete" data-id="{{id}}"></i></td>
     {{/ data}}
 
     </tbody>

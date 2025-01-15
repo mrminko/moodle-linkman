@@ -1,15 +1,17 @@
 import {call as fetchMany} from 'core/ajax';
 
-const getInitialData = () => {
+const deleteLinkmanItem = (id) => {
     return fetchMany([{
         methodname: 'local_linkman_link_reducer',
         args: {
-            action: 'init',
-            payload: [],
+            action: 'DELETE_ITEM',
+            payload: {
+                id: id,
+            },
         },
     }])[0];
 }
 
 export {
-    getInitialData
+    deleteLinkmanItem
 }

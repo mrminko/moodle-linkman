@@ -30,3 +30,4 @@ $string['link_note'] = 'Note';
 $string['add'] = 'Add';
 $string['linkman:config'] = 'Configure External Links Manager';
 $string['linkman:view'] = 'View External Links Manager';
+$string['confirmdelete'] = 'Are you sure you want to delete this external link?';

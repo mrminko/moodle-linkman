@@ -30,28 +30,37 @@ class link_reducer extends \core_external\external_api {
                         'created' => new external_value(PARAM_TEXT, 'item created'),
                         'baselink' => new external_value(PARAM_TEXT, 'item base link'),
                         'note' => new external_value(PARAM_TEXT, 'item note'),
-                    ]),
+                    ]), 'items to display', VALUE_OPTIONAL,
                 ),
                 'error' => new external_value(PARAM_TEXT, 'error message', VALUE_OPTIONAL),
-            ])
-        ], 'data to be displayed', VALUE_OPTIONAL);
+            ],'data to be displayed', VALUE_OPTIONAL)
+        ]);
     }
 
     public static function execute($action, $payload) {
         global $CFG, $DB;
         $params = self::validate_parameters(self::execute_parameters(), ['action' => $action, 'payload' => $payload]);
         $result = new \stdClass();
-        $result->success = true;
+        $result->success = false;
         $result->data = new stdClass();
-        $item = new stdClass();
-        $item->id = 1;
-        $item->name = 'mgmg';
-        $item->code = 'uadf';
-        $item->created = 'ndfa';
-        $item->baselink = 'fdfasa';
-        $item->note = 'noteeeee';
-//        $items = ['id' => 1, 'name' => 'mgmg', 'code' => 'uier', 'created' => 'jkfas', 'baselink' => 'base', 'note' => 'ndhfakl'];
-        $result->data->items = [$item];
+        switch ($params['action']) {
+            case 'DELETE_ITEM':
+                $id = $params['payload']['id'];
+                try {
+                    $deleted = $DB->delete_records('local_linkman', ['id' => $id]);
+                    if ($deleted) {
+                        $result->success = true;
+                    } else {
+                        $result->success = false;
+                    }
+                } catch (\Exception $e) {
+                    $result->success = false;
+                }
+                break;
+            default:
+                $result->data->error = "Error when deleting record.";
+                break;
+        }
         return $result;
     }
 }

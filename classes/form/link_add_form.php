@@ -12,6 +12,10 @@ class link_add_form extends dynamic_form {
     protected function definition() {
         $mform = $this->_form;
 
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+        $mform->setDefault('id', 0);
+
         $mform->addElement('text', 'name', get_string('link_name', 'local_linkman'), array('size' => 30, 'maxlength' => 20));
         $mform->setType('name', PARAM_TEXT);
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
@@ -38,24 +42,41 @@ class link_add_form extends dynamic_form {
     {
         global $CFG, $DB;
         $data = $this->get_data();
-        $data->created = time();
-        $data->code = random_string();
-        $inserted = $DB->insert_record('local_linkman', $data);
         $result = new \stdClass();
-        if ($inserted) {
-            $result->success = true;
-            $result->id = $inserted;
-            $result->data = $DB->get_record('local_linkman', ['id' => $inserted]);
+        $result->success = false;
+        if($data->id) {
+            $data->updated = time();
+            $updated = $DB->update_record('local_linkman', $data);
+            if ($updated) {
+                $result->success = true;
+                $result->id = $updated;
+                $result->data = $data;
+            } else {
+                $result->success = false;
+            }
         } else {
-            $result->success = false;
+            $data->created = time();
+            $data->code = random_string();
+            $inserted = $DB->insert_record('local_linkman', $data);
+            if ($inserted) {
+                $result->success = true;
+                $result->id = $inserted;
+                $result->data = $DB->get_record('local_linkman', ['id' => $inserted]);
+            } else {
+                $result->success = false;
+            }
         }
+
         return $result;
     }
 
     public function set_data_for_dynamic_submission(): void
     {
-
-        $this->set_data([]);
+        $action = $this->_ajaxformdata['action'];
+        if ($action === 'EDIT_ITEM') {
+            $data = $this->_ajaxformdata['data'];
+            $this->set_data(['id' => $data['id'], 'name' => $data['name'], 'baselink' => $data['base_link'], 'note' => $data['note']]);
+        }
     }
 
     protected function get_page_url_for_dynamic_submission(): moodle_url
