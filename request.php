@@ -20,5 +20,5 @@ if(!$record) {
     echo $OUTPUT->notification("Invalid code");
     echo $OUTPUT->footer();
 } else {
-    redirect($record->baselink, 'Redirecting.....', 3);
+    redirect($record->baselink);
 }
